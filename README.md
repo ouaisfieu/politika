@@ -8,7 +8,7 @@
 
 🌱 CITOYEN → 📚 FORMÉ → 🤝 ORGANISÉ → 🏛️ CANDIDAT → 👑 ÉLU
 
-```
+
 
 ---
 
