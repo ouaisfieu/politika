@@ -93,5 +93,7 @@ POLiT!KA (Hub)
     ├── L'ÉTOILE NOIRE   (ARG hardcore)
     └── + autres modules...
 ```
+---
+
 
 **Tout est interopérable via `kern-schema.json` et exportable en un clic !** 🎉
