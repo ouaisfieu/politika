@@ -1346,16 +1346,28 @@ function cmdRepondre(answer) {
         return;
     }
     
-    const correct = State.currentTest.answer.toLowerCase();
+    // Verify the test matches current level (anti-cheat)
+    if (State.currentTest.requiredLevel !== State.level) {
+        Audio.error();
+        print('⛔ Ce test ne correspond pas à votre niveau actuel.', 'error');
+        State.currentTest = null;
+        return;
+    }
+    
     const given = answer.toLowerCase().trim();
     
-    if (given === correct || given.includes(correct) || correct.includes(given)) {
+    // Check against accepted answers (strict matching)
+    const isCorrect = State.currentTest.acceptedAnswers.some(accepted => 
+        given === accepted.toLowerCase()
+    );
+    
+    if (isCorrect) {
         Audio.success();
         triggerGlitch();
         print('');
         print('✓ RÉPONSE CORRECTE', 'success');
         
-        State.level++;
+        State.level = State.currentTest.unlocksLevel;
         State.currentTest = null;
         State.save();
         updateHUD();
@@ -1927,15 +1939,23 @@ function showDocument(docId) {
     docContent.innerHTML = `<div class="doc-frame">${content}</div>`;
     viewer.classList.add('show');
     
-    // Check for test
+    // Check for test - each test is bound to a specific level
     if (docId.startsWith('test_')) {
         const tests = {
-            'test_init': { answer: 'qpc' },
-            'test_diag': { answer: 'terre' },
-            'test_arsl': { answer: 'cellule venus' },
-            'test_osnt': { answer: 'bellingcat' }
+            'test_init': { answer: 'qpc', requiredLevel: 1, unlocksLevel: 2, acceptedAnswers: ['qpc', 'question prioritaire de constitutionnalité', 'question prioritaire de constitutionnalite'] },
+            'test_diag': { answer: 'terre', requiredLevel: 2, unlocksLevel: 3, acceptedAnswers: ['terre', 'soulevements de la terre', 'soulèvements de la terre', 'les soulevements de la terre', 'les soulèvements de la terre'] },
+            'test_arsl': { answer: 'cellule venus', requiredLevel: 3, unlocksLevel: 4, acceptedAnswers: ['cellule venus', 'cellule vénus', 'venus', 'vénus'] },
+            'test_osnt': { answer: 'bellingcat', requiredLevel: 4, unlocksLevel: 5, acceptedAnswers: ['bellingcat'] }
         };
-        State.currentTest = tests[docId] || null;
+        const test = tests[docId];
+        if (test && State.level === test.requiredLevel) {
+            State.currentTest = test;
+        } else if (test && State.level > test.requiredLevel) {
+            // Already passed this level
+            State.currentTest = null;
+        } else {
+            State.currentTest = null;
+        }
     }
 }
 
