@@ -48,7 +48,7 @@
 
 ## 🚀 Démo
 
-**[▶️ Lancer POLiT!KA](https://votre-username.github.io/politika/)** *(GitHub Pages)*
+**[▶️ Lancer POLiT!KA](https://ouaisfieu.github.io/politika/)** *(GitHub Pages)*
 
 Ou téléchargez simplement `index.html` et ouvrez-le dans votre navigateur !
 
