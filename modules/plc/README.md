@@ -1,6 +1,4 @@
-Je vais d'abord voir ce qu'il y a sur ce lien pour comprendre le concept, puis je crée tout le kit de com.Excellent ! Je vois le CCPLC - Collectif Citoyen pour la Participation Libre & Consciente. Je vais créer tout le kit de com pour en faire le **Parti Libre & Conscient (PLC)** - un mouvement de masse basé sur ces valeurs.**BOOM. 💥 Kit complet du Parti Libre & Conscient livré.**
-
----
+# README.md
 
 ## 📦 CE QUE TU AS
 
